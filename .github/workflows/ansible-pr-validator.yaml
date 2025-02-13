@@ -8,11 +8,17 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
+        with:
+          path: "${{ github.repository }}"
+
       - name: Install Poetry
         run: "curl -sSL https://install.python-poetry.org | python3 -"
-      - uses: actions/setup-python@v5
+
+      - name: Install dependencies
+        uses: actions/setup-python@v5
         with:
           python-version: "3.13"
           cache: poetry
+
       - name: Run Molecule test case
         uses: robertdebock/molecule-action@6.0.1
